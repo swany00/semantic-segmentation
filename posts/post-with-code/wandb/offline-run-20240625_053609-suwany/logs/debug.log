@@ -1,0 +1,57 @@
+2024-06-25 05:36:09,151 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Current SDK version is 0.17.3
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Configure stats pid to 385666
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Loading settings from /root/.config/wandb/settings
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Loading settings from /root/semantic-segmentation/posts/post-with-code/wandb/settings
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_init.py:_log_setup():520] Logging user logs to /root/semantic-segmentation/posts/post-with-code/wandb/offline-run-20240625_053609-suwany/logs/debug.log
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_init.py:_log_setup():521] Logging internal logs to /root/semantic-segmentation/posts/post-with-code/wandb/offline-run-20240625_053609-suwany/logs/debug-internal.log
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_init.py:init():560] calling init triggers
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {}
+2024-06-25 05:36:09,152 INFO    MainThread:385666 [wandb_init.py:init():585] re-initializing run, found existing run on stack: suwany
+2024-06-25 05:36:09,154 INFO    MainThread:385666 [wandb_run.py:_finish():2109] finishing run suwany
+2024-06-25 05:36:09,154 ERROR   MainThread:385666 [jupyter.py:save_history():436] Run pip install nbformat to save notebook history
+2024-06-25 05:36:09,154 INFO    MainThread:385666 [jupyter.py:save_ipynb():372] not saving jupyter notebook
+2024-06-25 05:36:09,154 INFO    MainThread:385666 [wandb_init.py:_jupyter_teardown():448] cleaning up jupyter logic
+2024-06-25 05:36:09,154 INFO    MainThread:385666 [wandb_run.py:_atexit_cleanup():2349] got exitcode: 0
+2024-06-25 05:36:09,154 INFO    MainThread:385666 [wandb_run.py:_restore():2332] restore
+2024-06-25 05:36:09,155 INFO    MainThread:385666 [wandb_run.py:_restore():2338] restore done
+2024-06-25 05:36:10,170 INFO    MainThread:385666 [wandb_run.py:_footer_history_summary_info():3991] rendering history
+2024-06-25 05:36:10,170 INFO    MainThread:385666 [wandb_run.py:_footer_history_summary_info():4023] rendering summary
+2024-06-25 05:36:10,299 INFO    MainThread:385666 [wandb_init.py:init():610] starting backend
+2024-06-25 05:36:10,299 INFO    MainThread:385666 [wandb_init.py:init():614] setting up manager
+2024-06-25 05:36:10,300 INFO    MainThread:385666 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-06-25 05:36:10,300 INFO    MainThread:385666 [wandb_init.py:init():622] backend started and connected
+2024-06-25 05:36:10,303 INFO    MainThread:385666 [wandb_run.py:_label_probe_notebook():1334] probe notebook
+2024-06-25 05:36:10,303 INFO    MainThread:385666 [wandb_run.py:_label_probe_notebook():1344] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2024-06-25 05:36:10,303 INFO    MainThread:385666 [wandb_init.py:init():711] updated telemetry
+2024-06-25 05:36:10,308 INFO    MainThread:385666 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-06-25 05:36:11,179 INFO    MainThread:385666 [wandb_init.py:init():795] starting run threads in backend
+2024-06-25 05:36:14,183 INFO    MainThread:385666 [wandb_run.py:_console_start():2380] atexit reg
+2024-06-25 05:36:14,183 INFO    MainThread:385666 [wandb_run.py:_redirect():2235] redirect: wrap_raw
+2024-06-25 05:36:14,183 INFO    MainThread:385666 [wandb_run.py:_redirect():2300] Wrapping output streams.
+2024-06-25 05:36:14,183 INFO    MainThread:385666 [wandb_run.py:_redirect():2325] Redirects installed.
+2024-06-25 05:36:14,183 INFO    MainThread:385666 [wandb_init.py:init():838] run started, returning control to user process
+2024-06-25 05:36:14,183 INFO    MainThread:385666 [wandb_run.py:_config_callback():1382] config_cb None None {'epochs': 200, 'batch_size': 8, 'name': 'suwany'}
+2024-06-25 05:39:18,661 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Current SDK version is 0.17.3
+2024-06-25 05:39:18,661 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Configure stats pid to 385666
+2024-06-25 05:39:18,661 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Loading settings from /root/.config/wandb/settings
+2024-06-25 05:39:18,661 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Loading settings from /root/semantic-segmentation/posts/post-with-code/wandb/settings
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_init.py:_log_setup():520] Logging user logs to /root/semantic-segmentation/posts/post-with-code/wandb/offline-run-20240625_053918-suwany/logs/debug.log
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_init.py:_log_setup():521] Logging internal logs to /root/semantic-segmentation/posts/post-with-code/wandb/offline-run-20240625_053918-suwany/logs/debug-internal.log
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_init.py:_jupyter_setup():466] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7f285f0e8f40>
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_init.py:init():560] calling init triggers
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {}
+2024-06-25 05:39:18,662 INFO    MainThread:385666 [wandb_init.py:init():585] re-initializing run, found existing run on stack: suwany
+2024-06-25 05:39:18,664 INFO    MainThread:385666 [wandb_run.py:_finish():2109] finishing run suwany
+2024-06-25 05:39:18,664 INFO    MainThread:385666 [wandb_run.py:_atexit_cleanup():2349] got exitcode: 0
+2024-06-25 05:39:18,664 INFO    MainThread:385666 [wandb_run.py:_restore():2332] restore
+2024-06-25 05:39:18,664 INFO    MainThread:385666 [wandb_run.py:_restore():2338] restore done
+2024-06-25 05:39:19,679 INFO    MainThread:385666 [wandb_run.py:_footer_history_summary_info():3991] rendering history
+2024-06-25 05:39:19,679 INFO    MainThread:385666 [wandb_run.py:_footer_history_summary_info():4023] rendering summary
