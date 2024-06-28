@@ -244,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is a post with executable code.</p>
 <section id="imports" class="level1">
 <h1>Imports</h1>
-<div id="cell-2" class="cell" data-execution_count="2">
+<div id="cell-2" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Datasets</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dataset" class="level1">
 <h1>Dataset</h1>
-<div id="cell-5" class="cell" data-execution_count="3">
+<div id="cell-5" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KariRoadDataset(torch.utils.data.Dataset):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, root, train<span class="op">=</span><span class="va">False</span>):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.root <span class="op">=</span> Path(root)</span>
@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="utils" class="level1">
 <h1>Utils</h1>
-<div id="cell-9" class="cell" data-execution_count="4">
+<div id="cell-9" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_color_label(label):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    h, w <span class="op">=</span> label.shape</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    color_label <span class="op">=</span> np.zeros((h, w, <span class="dv">3</span>), dtype<span class="op">=</span>np.uint8)  <span class="co"># (H, W, 3) shape</span></span>
@@ -654,7 +654,7 @@ Class3:1.0 / 2.0  &lt;=정답1 2개 중 1개를 맞췄어</code></pre>
 <div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="iou.png" class="img-fluid figure-img"></p>
+<p><img src="iou1.png" class="img-fluid figure-img"></p>
 <figcaption>iou 0.39 예시</figcaption>
 </figure>
 </div>
@@ -734,7 +734,7 @@ Mean IoU: 0.52083</code></pre>
 </section>
 <section id="loss" class="level1">
 <h1>Loss</h1>
-<div id="cell-15" class="cell" data-execution_count="7">
+<div id="cell-15" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bce_loss(preds, targets, pos_weight<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    bce_loss <span class="op">=</span> F.binary_cross_entropy_with_logits(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        preds.<span class="bu">float</span>(),</span>
@@ -791,14 +791,14 @@ Mean IoU: 0.52083</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true"><span style="color:sky"> bce_loss </span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false"><span style="color:sky">ce_loss</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-3" role="tab" aria-controls="tabset-7-3" aria-selected="false"><span style="color:sky">dice_loss</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-4" role="tab" aria-controls="tabset-7-4" aria-selected="false"><span style="color:sky">jaccard_loss</span></a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<div class="sourceCode" id="cb28"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="at">    가중치가 적용된 이진 교차 엔트로피 손실을 계산</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Args</span><span class="kw">:</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">targets</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">B</span><span class="kw">,</span><span class="at"> </span><span class="dv">1</span><span class="kw">,</span><span class="at"> H</span><span class="kw">,</span><span class="at"> W</span><span class="kw">]</span><span class="at"> 형태의 텐서. 실제 값 (레이블).</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">preds</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">B</span><span class="kw">,</span><span class="at"> </span><span class="dv">1</span><span class="kw">,</span><span class="at"> H</span><span class="kw">,</span><span class="at"> W</span><span class="kw">]</span><span class="at"> 형태의 텐서. 모델의 예측 값.</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">pos_weight</span><span class="kw">:</span><span class="at"> 양성 클래스에 대한 가중치 (선택 사항).</span></span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="at">가중치가 적용된 이진 교차 엔트로피 손실을 계산</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Args</span><span class="kw">:</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">targets</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">B</span><span class="kw">,</span><span class="at"> </span><span class="dv">1</span><span class="kw">,</span><span class="at"> H</span><span class="kw">,</span><span class="at"> W</span><span class="kw">]</span><span class="at"> 형태의 텐서. 실제 값 (레이블).</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">preds</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">B</span><span class="kw">,</span><span class="at"> </span><span class="dv">1</span><span class="kw">,</span><span class="at"> H</span><span class="kw">,</span><span class="at"> W</span><span class="kw">]</span><span class="at"> 형태의 텐서. 모델의 예측 값.</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">pos_weight</span><span class="kw">:</span><span class="at"> 양성 클래스에 대한 가중치 (선택 사항).</span></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Returns</span><span class="kw">:</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">bce_loss</span><span class="kw">:</span><span class="at"> 가중치가 적용된 이진 교차 엔트로피 손실.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Returns</span><span class="kw">:</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">bce_loss</span><span class="kw">:</span><span class="at"> 가중치가 적용된 이진 교차 엔트로피 손실.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="BCE.png" class="img-fluid figure-img"></p>
@@ -852,7 +852,12 @@ Mean IoU: 0.52083</code></pre>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">Returns</span><span class="kw">:</span></span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">dice_loss</span><span class="kw">:</span><span class="at"> Sørensen–Dice 손실 값.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>ㅉ <img src="DICE1.png" class="img-fluid" alt="DICE LOSS"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="DICE1.png" class="img-fluid figure-img"></p>
+<figcaption>DICE LOSS</figcaption>
+</figure>
+</div>
 <ul>
 <li><p>∣P∩T∣: 예측된 세그멘테이션 영역 P과 실제 타겟 세그멘테이션 영역 T의 교집합의 크기입니다.</p></li>
 <li><p>∣P∣: 예측된 세그멘테이션 영역 P의 크기 또는 원소 수입니다.</p></li>
@@ -873,26 +878,23 @@ Mean IoU: 0.52083</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="JACCARD.png" class="img-fluid figure-img"></p>
-<figcaption>JACCARD</figcaption>
+<figcaption>JACCARD LOSS</figcaption>
 </figure>
 </div>
 <ul>
-<li>iou기반 손실:
-<ul>
-<li>1에서 IoU를 뺀 값으로, 두 개의 세트(예측과 실제 타겟) 간의 겹치는 영역을 정량화</li>
-</ul></li>
-<li>분할작업 유용 :
-<ul>
-<li>이미지 세그멘테이션과 같은 픽셀 수준의 작업에 유용</li>
-</ul></li>
+<li>∣P∩T∣: 예측된 영역 𝑃과 실제 타겟 영역 𝑇의 교집합의 크기</li>
+<li>∣P∪T∣: 예측된 영역 𝑃과 실제 타겟 영역 𝑇의 합집합의 크기</li>
 </ul>
+<p>목적: Jaccard 지수는 두 세그멘테이션 영역의 중첩 정도를 측정하여 예측된 세그멘테이 P이 실제 타겟 세그멘테이션 T과 얼마나 일치하는지를 평가합니다. 이 지표는 0에서 1 사이의 값을 가지며, 1에 가까울수록 두 영역이 완전히 일치함을 나타냅니다.</p>
+<p>계산 방법: Jaccard 지수는 예측된 영역 𝑃과 실제 타겟 영역 𝑇의 교집합 크기를 두 영역의 합집합 크기로 나누어 계산합니다. 이는 두 영역이 얼마나 겹치는지를 평가하며, 분자는 교집합의 크기를 나타내고 분모는 전체적인 예측된 영역과 실제 타겟 영역의 크기를 반영합니다.</p>
+<p>응용: Jaccard 지수는 주로 이미지 세분화의 성능을 평가하는 데 사용됩니다. 다양한 이미지 처리 및 패턴 인식 문제에서 유사성을 비교하고 모델의 정확도를 평가하는 데 중요한 지표로 활용됩니다.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="one_epoch-train-val" class="level1">
 <h1>one_epoch( train, val )</h1>
-<div id="cell-18" class="cell" data-execution_count="8">
+<div id="cell-18" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_one_epoch(train_dataloader, model, optimizer, device):</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    losses <span class="op">=</span> [] </span>
@@ -911,151 +913,309 @@ Mean IoU: 0.52083</code></pre>
 <span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> val_one_epoch(val_dataloader, model, confusion_matrix, device):</span>
 <span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
 <span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    losses <span class="op">=</span> []</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (imgs, targets, img_file) <span class="kw">in</span> <span class="bu">enumerate</span>(val_dataloader):</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>        imgs, targets <span class="op">=</span> imgs.to(device), targets.to(device)</span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> torch.no_grad():</span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>            preds <span class="op">=</span> model(imgs)[<span class="st">'out'</span>]   <span class="co"># forward, preds: (B, 2, H, W)</span></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>            loss <span class="op">=</span> ce_loss(preds, targets)</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>            losses.append(loss.item())</span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>            confusion_matrix.process_batch(preds, targets)</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> preds.size(<span class="dv">0</span>)</span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># sample images</span></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>                preds <span class="op">=</span> torch.argmax(preds, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># (1, H, W)  </span></span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>                    save_file <span class="op">=</span> os.path.join(<span class="st">'outputs'</span>, <span class="st">'val_</span><span class="sc">%d</span><span class="st">.png'</span> <span class="op">%</span> (j))</span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>                    plot_image(imgs[j], preds[j], save_file)</span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    avg_loss <span class="op">=</span> torch.tensor(losses).mean().item()</span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> avg_loss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (imgs, targets, img_file) <span class="kw">in</span> <span class="bu">enumerate</span>(val_dataloader):</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        imgs, targets <span class="op">=</span> imgs.to(device), targets.to(device)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>            preds <span class="op">=</span> model(imgs)[<span class="st">'out'</span>]   <span class="co"># forward, preds: (B, 2, H, W)</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>            loss <span class="op">=</span> ce_loss(preds, targets)</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>            losses.append(loss.item())</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>            confusion_matrix.process_batch(preds, targets)</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># sample images</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>                preds <span class="op">=</span> torch.argmax(preds, axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># (1, H, W)  </span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>                    save_file <span class="op">=</span> os.path.join(<span class="st">'outputs'</span>, <span class="st">'val_</span><span class="sc">%d</span><span class="st">.png'</span> <span class="op">%</span> (j))</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>                    plot_image(imgs[j], preds[j], save_file)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>    avg_loss <span class="op">=</span> torch.tensor(losses).mean().item()</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> avg_loss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true"><span style="color:sky">train_one_epoch</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false"><span style="color:sky">val_one_epoch</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<pre><code>1) def train_one_epoch(train_dataloader, model, optimizer, device)이라는
+    함수는 파라미터가 4개이다.
+2) model.train()은 학습모드인것을 나타낸다.
+3) losses = []는 train의 loss값을 저장하기 위함이다.
+4) 반복문(for)의 i 는 enumerate함수에서 만들어진(인덱싱된) 0부터 n까지의
+    숫자이고 (imgs, targets, _)는 각각 imgs는 위성사진 targets는 정답라벨이다.
+5) device를 통해 cpu에서 gpu로 이동시키는 과정으로 device는 뒤에서 정의할 것이다.
+6) model에 img를 집어넣어 preds를 예측해본다. 이때 [out]이 붙는 이유는
+    torchvision에 저장되어 있는 deeplabv3모델을 사용할때의 방식이다.
+7) loss는 앞에서 정의해준 로스 중 ce_loss를 사용했다. 
+    이때 preds가 먼저 들어가야하는 점을 주의하자
+8) optimizer.zero는 loss의 미분값을 계산하기전 0으로 초기화하는 과정이다.
+9) loss.backward()는 loss값을 편미분하는 과정이다. 
+    편미분은 2차원 공간에서 미분을 한 번에 못하니깐 
+    순차적으로 미분하는 과정이라고 생각하면 된다.
+10) 미분한 값을 모델의 파라미터값에 반영한다(미분값을 빼주는과정). 
+11) iteration별 train loss를 표시해준다.
+12) loss를 losses에 저장한다.
+13) return을 통해 함수 밖에서도 losses의 평균을 호출 할 수 있게한다.</code></pre>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<pre><code>1) def val_one_epoch(val_dataloader, model, confusion_matrix, device)이라는
+    함수는 파라미터가 4개이다.
+2) model.eval()은 학습모드인것을 나타낸다.
+3) losses = []는 validation의 loss값을 저장하기 위함이다.
+4) 반복문(for)의 i 는 enumerate함수에서 만들어진(인덱싱된) 0부터 n까지의
+    숫자이고 (imgs, targets, _)는 각각 imgs는 위성사진 targets는 정답라벨이다.
+5) device를 통해 cpu에서 gpu로 이동시키는 과정으로 device는 뒤에서 정의할 것이다.
+6) model에 img를 집어넣어 preds를 예측해본다. 이때 [out]이 붙는 이유는
+    torchvision에 저장되어 있는 deeplabv3모델을 사용할때의 방식이다.
+7) loss는 앞에서 정의해준 로스 중 ce_loss를 사용했다. 
+    이때 preds가 먼저 들어가야하는 점을 주의하자
+8) loss를 losses에 저장한다.
+9) 이후에 ConfusionMatrix를 이용해 confusion_matrix라는 인스턴스를 만들게
+ 되는데 만들어진 인스턴스에 모델이 예측한 preds와 정답지 targets을 넣어주면 
+ 행렬이 계산이 돼서 아래와 같이 사용가능하다.</code></pre>
+<pre><code>        val_epoch_iou = confusion_matrix.get_iou()
+        val_epoch_mean_iou = confusion_matrix.get_mean_iou()
+        val_epoch_pix_accuracy = confusion_matrix.get_pix_acc() </code></pre>
+<pre><code>
+12) ~ 16) i=0일때(epoch이 새로 시작될때)마다 plot_image 함수를 이용해 
+img에 preds를 오버레이해서 사진으로 저장한다.(총 3장 저장한다.) 
+추가로 저장된 사진은 이름이 val_0(1,2).png으로 매 에폭마다 사진이 바뀐다. 
+따로 저장하려면 수정필요
+17~) return을 통해 함수 밖에서도 validation losses의 평균을 호출 할 수 있게한다.</code></pre>
+</div>
+</div>
 </div>
 </section>
 <section id="train" class="level1">
 <h1>Train</h1>
-<div id="cell-20" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(epochs<span class="op">=</span><span class="dv">200</span>, batch_size <span class="op">=</span> <span class="dv">8</span> , name <span class="op">=</span> <span class="st">'suwany'</span>):</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#&nbsp;wandb&nbsp;settings</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    wandb.init(<span class="bu">id</span><span class="op">=</span>name, resume<span class="op">=</span><span class="st">'allow'</span>, mode<span class="op">=</span><span class="st">'disabled'</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    wandb.config.update({</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'epochs'</span>: epochs,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'batch_size'</span>: batch_size,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'name'</span>: name</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train dataset</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    train_dataset <span class="op">=</span> KariRoadDataset(<span class="st">'./data/kari-road'</span>, train<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train dataloader</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    num_workers <span class="op">=</span> <span class="bu">min</span>([os.cpu_count(), batch_size, <span class="dv">16</span>])</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    train_dataloader <span class="op">=</span> torch.utils.data.DataLoader(train_dataset, batch_size<span class="op">=</span>batch_size, </span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>                            shuffle<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span>num_workers, pin_memory<span class="op">=</span><span class="va">True</span>, drop_last<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Validation dataset</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    val_dataset <span class="op">=</span> KariRoadDataset(<span class="st">'./data/kari-road'</span>, train<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    val_dataloader <span class="op">=</span> torch.utils.data.DataLoader(val_dataset, batch_size<span class="op">=</span>batch_size, </span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>                            shuffle<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span>num_workers, pin_memory<span class="op">=</span><span class="va">True</span>, drop_last<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Network model</span></span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    num_classes <span class="op">=</span> <span class="dv">10</span> <span class="co"># background + 1 classes</span></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> models.segmentation.deeplabv3_resnet101(num_classes<span class="op">=</span>num_classes)  </span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># GPU-support</span></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>    device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> torch.cuda.device_count() <span class="op">&gt;</span> <span class="dv">1</span>:   <span class="co"># multi-GPU</span></span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> torch.nn.DataParallel(model)</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>    model.to(device)</span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optimizer</span></span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>    optimizer <span class="op">=</span> optim.Adam(model.parameters(), lr<span class="op">=</span><span class="fl">3e-4</span>)</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Learning rate scheduler</span></span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>    lr_scheduler <span class="op">=</span> torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode<span class="op">=</span><span class="st">'min'</span>, factor<span class="op">=</span><span class="fl">0.5</span>, patience<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># loading a weight file (if exists)</span></span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>    weight_file <span class="op">=</span> Path(<span class="st">'weights'</span>)<span class="op">/</span>(name <span class="op">+</span> <span class="st">'.pth'</span>)</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>    best_accuracy <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    start_epoch, end_epoch <span class="op">=</span> (<span class="dv">0</span>, epochs)</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(weight_file):</span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>        checkpoint <span class="op">=</span> torch.load(weight_file)</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>        model.load_state_dict(checkpoint[<span class="st">'model'</span>])</span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>        start_epoch <span class="op">=</span> checkpoint[<span class="st">'epoch'</span>] <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>        best_accuracy <span class="op">=</span> checkpoint[<span class="st">'best_accuracy'</span>]</span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'resumed from epoch </span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> start_epoch)</span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>    confusion_matrix <span class="op">=</span> ConfusionMatrix(num_classes)</span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a> <span class="co"># training/validation</span></span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(start_epoch, end_epoch):</span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: </span><span class="sc">%d</span><span class="st">/</span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> (epoch, end_epoch<span class="op">-</span><span class="dv">1</span>))</span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>        t0 <span class="op">=</span> time.time()</span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>        <span class="co"># training</span></span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>        epoch_loss <span class="op">=</span> train_one_epoch(train_dataloader, model, optimizer, device)</span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>        t1 <span class="op">=</span> time.time()</span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'loss=</span><span class="sc">%.4f</span><span class="st"> (took </span><span class="sc">%.2f</span><span class="st"> sec)'</span> <span class="op">%</span> (epoch_loss, t1<span class="op">-</span>t0))</span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>        lr_scheduler.step(epoch_loss)</span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># validation</span></span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>        val_epoch_loss <span class="op">=</span> val_one_epoch(val_dataloader, model, confusion_matrix, device)</span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>        val_epoch_iou <span class="op">=</span> confusion_matrix.get_iou()</span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>        val_epoch_mean_iou <span class="op">=</span> confusion_matrix.get_mean_iou()</span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>        val_epoch_pix_accuracy <span class="op">=</span> confusion_matrix.get_pix_acc()</span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'[validation] loss=</span><span class="sc">%.4f</span><span class="st">, mean iou=</span><span class="sc">%.4f</span><span class="st">, pixel accuracy=</span><span class="sc">%.4f</span><span class="st">'</span> <span class="op">%</span> </span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>              (val_epoch_loss, val_epoch_mean_iou, val_epoch_pix_accuracy))</span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'class IoU: ['</span> <span class="op">+</span> <span class="st">', '</span>.join([(<span class="st">'</span><span class="sc">%.4f</span><span class="st">'</span> <span class="op">%</span> (x)) <span class="cf">for</span> x <span class="kw">in</span> val_epoch_iou]) <span class="op">+</span> <span class="st">']'</span>)</span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>        <span class="co"># saving the best status into a weight file</span></span>
-<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> val_epoch_pix_accuracy <span class="op">&gt;</span> best_accuracy:</span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a>             best_weight_file <span class="op">=</span> Path(<span class="st">'weights'</span>)<span class="op">/</span>(name <span class="op">+</span> <span class="st">'_best.pth'</span>)</span>
-<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a>             best_accuracy <span class="op">=</span> val_epoch_pix_accuracy</span>
-<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a>             state <span class="op">=</span> {<span class="st">'model'</span>: model.state_dict(), <span class="st">'epoch'</span>: epoch, <span class="st">'best_accuracy'</span>: best_accuracy}</span>
-<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a>             torch.save(state, best_weight_file)</span>
-<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a>             <span class="bu">print</span>(<span class="st">'best accuracy=&gt;saved</span><span class="ch">\n</span><span class="st">'</span>)</span>
-<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>        <span class="co"># saving the current status into a weight file</span></span>
-<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a>        state <span class="op">=</span> {<span class="st">'model'</span>: model.state_dict(), <span class="st">'epoch'</span>: epoch, <span class="st">'best_accuracy'</span>: best_accuracy}</span>
-<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a>        torch.save(state, weight_file)</span>
-<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a>        <span class="co"># wandb logging</span></span>
-<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a>        wandb.log({<span class="st">'train_loss'</span>: epoch_loss, <span class="st">'val_loss'</span>: val_epoch_loss, <span class="st">'val_accuracy'</span>: val_epoch_pix_accuracy})</span>
-<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-21" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#def train______________________________________________________#   </span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train(epochs<span class="op">=</span><span class="dv">200</span>, batch_size <span class="op">=</span> <span class="dv">8</span> , name <span class="op">=</span> <span class="st">'suwany'</span>):</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1______________________________________________________________#    </span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#&nbsp;wandb&nbsp;settings</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    wandb.init(<span class="bu">id</span><span class="op">=</span>name, resume<span class="op">=</span><span class="st">'allow'</span>, mode<span class="op">=</span><span class="st">'disabled'</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    wandb.config.update({</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'epochs'</span>: epochs,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'batch_size'</span>: batch_size,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'name'</span>: name</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#2______________________________________________________________#   </span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train dataset</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    train_dataset <span class="op">=</span> KariRoadDataset(<span class="st">'./data/kari-road'</span>, train<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train dataloader</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    num_workers <span class="op">=</span> <span class="bu">min</span>([os.cpu_count(), batch_size, <span class="dv">16</span>])</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    train_dataloader <span class="op">=</span> torch.utils.data.DataLoader(train_dataset, batch_size<span class="op">=</span>batch_size, </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>                            shuffle<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span>num_workers, pin_memory<span class="op">=</span><span class="va">True</span>, drop_last<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Validation dataset</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>    val_dataset <span class="op">=</span> KariRoadDataset(<span class="st">'./data/kari-road'</span>, train<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>    val_dataloader <span class="op">=</span> torch.utils.data.DataLoader(val_dataset, batch_size<span class="op">=</span>batch_size, </span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>                            shuffle<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span>num_workers, pin_memory<span class="op">=</span><span class="va">True</span>, drop_last<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co">#3______________________________________________________________#   </span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Network model</span></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>    num_classes <span class="op">=</span> <span class="dv">10</span> <span class="co"># background + 1 classes</span></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> models.segmentation.deeplabv3_resnet101(num_classes<span class="op">=</span>num_classes)  </span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># GPU-support</span></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>    device <span class="op">=</span> torch.device(<span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span>)</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> torch.cuda.device_count() <span class="op">&gt;</span> <span class="dv">1</span>:   <span class="co"># multi-GPU</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> torch.nn.DataParallel(model)</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>    model.to(device)</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a><span class="co">#______________________________________________________________#   </span></span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optimizer</span></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>    optimizer <span class="op">=</span> optim.Adam(model.parameters(), lr<span class="op">=</span><span class="fl">3e-4</span>)</span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Learning rate scheduler</span></span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>    lr_scheduler <span class="op">=</span> torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode<span class="op">=</span><span class="st">'min'</span>, factor<span class="op">=</span><span class="fl">0.5</span>, patience<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="co">#______________________________________________________________#   </span></span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># loading a weight file (if exists)</span></span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>    weight_file <span class="op">=</span> Path(<span class="st">'weights'</span>)<span class="op">/</span>(name <span class="op">+</span> <span class="st">'.pth'</span>)</span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>    best_accuracy <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>    start_epoch, end_epoch <span class="op">=</span> (<span class="dv">0</span>, epochs)</span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.exists(weight_file):</span>
+<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a>        checkpoint <span class="op">=</span> torch.load(weight_file)</span>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a>        model.load_state_dict(checkpoint[<span class="st">'model'</span>])</span>
+<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a>        start_epoch <span class="op">=</span> checkpoint[<span class="st">'epoch'</span>] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a>        best_accuracy <span class="op">=</span> checkpoint[<span class="st">'best_accuracy'</span>]</span>
+<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'resumed from epoch </span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> start_epoch)</span>
+<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a><span class="co">#______________________________________________________________#       </span></span>
+<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>    confusion_matrix <span class="op">=</span> ConfusionMatrix(num_classes)</span>
+<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a> <span class="co"># training/validation</span></span>
+<span id="cb37-54"><a href="#cb37-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(start_epoch, end_epoch):</span>
+<span id="cb37-55"><a href="#cb37-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: </span><span class="sc">%d</span><span class="st">/</span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> (epoch, end_epoch<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a>        t0 <span class="op">=</span> time.time()</span>
+<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a>        <span class="co"># training</span></span>
+<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a>        epoch_loss <span class="op">=</span> train_one_epoch(train_dataloader, model, optimizer, device)</span>
+<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a>        t1 <span class="op">=</span> time.time()</span>
+<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'loss=</span><span class="sc">%.4f</span><span class="st"> (took </span><span class="sc">%.2f</span><span class="st"> sec)'</span> <span class="op">%</span> (epoch_loss, t1<span class="op">-</span>t0))</span>
+<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a>        lr_scheduler.step(epoch_loss)</span>
+<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a>        <span class="co"># validation</span></span>
+<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a>        val_epoch_loss <span class="op">=</span> val_one_epoch(val_dataloader, model, confusion_matrix, device)</span>
+<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a>        val_epoch_iou <span class="op">=</span> confusion_matrix.get_iou()</span>
+<span id="cb37-65"><a href="#cb37-65" aria-hidden="true" tabindex="-1"></a>        val_epoch_mean_iou <span class="op">=</span> confusion_matrix.get_mean_iou()</span>
+<span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a>        val_epoch_pix_accuracy <span class="op">=</span> confusion_matrix.get_pix_acc()</span>
+<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'[validation] loss=</span><span class="sc">%.4f</span><span class="st">, mean iou=</span><span class="sc">%.4f</span><span class="st">, pixel accuracy=</span><span class="sc">%.4f</span><span class="st">'</span> <span class="op">%</span> </span>
+<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a>              (val_epoch_loss, val_epoch_mean_iou, val_epoch_pix_accuracy))</span>
+<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'class IoU: ['</span> <span class="op">+</span> <span class="st">', '</span>.join([(<span class="st">'</span><span class="sc">%.4f</span><span class="st">'</span> <span class="op">%</span> (x)) <span class="cf">for</span> x <span class="kw">in</span> val_epoch_iou]) <span class="op">+</span> <span class="st">']'</span>)</span>
+<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a>        <span class="co"># saving the best status into a weight file</span></span>
+<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> val_epoch_pix_accuracy <span class="op">&gt;</span> best_accuracy:</span>
+<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a>             best_weight_file <span class="op">=</span> Path(<span class="st">'weights'</span>)<span class="op">/</span>(name <span class="op">+</span> <span class="st">'_best.pth'</span>)</span>
+<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a>             best_accuracy <span class="op">=</span> val_epoch_pix_accuracy</span>
+<span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a>             state <span class="op">=</span> {<span class="st">'model'</span>: model.state_dict(), <span class="st">'epoch'</span>: epoch, <span class="st">'best_accuracy'</span>: best_accuracy}</span>
+<span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a>             torch.save(state, best_weight_file)</span>
+<span id="cb37-77"><a href="#cb37-77" aria-hidden="true" tabindex="-1"></a>             <span class="bu">print</span>(<span class="st">'best accuracy=&gt;saved</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb37-78"><a href="#cb37-78" aria-hidden="true" tabindex="-1"></a>        <span class="co"># saving the current status into a weight file</span></span>
+<span id="cb37-79"><a href="#cb37-79" aria-hidden="true" tabindex="-1"></a>        state <span class="op">=</span> {<span class="st">'model'</span>: model.state_dict(), <span class="st">'epoch'</span>: epoch, <span class="st">'best_accuracy'</span>: best_accuracy}</span>
+<span id="cb37-80"><a href="#cb37-80" aria-hidden="true" tabindex="-1"></a>        torch.save(state, weight_file)</span>
+<span id="cb37-81"><a href="#cb37-81" aria-hidden="true" tabindex="-1"></a>        <span class="co"># wandb logging</span></span>
+<span id="cb37-82"><a href="#cb37-82" aria-hidden="true" tabindex="-1"></a>        wandb.log({<span class="st">'train_loss'</span>: epoch_loss, <span class="st">'val_loss'</span>: val_epoch_loss, <span class="st">'val_accuracy'</span>: val_epoch_pix_accuracy})</span>
+<span id="cb37-83"><a href="#cb37-83" aria-hidden="true" tabindex="-1"></a><span class="co">#______________________________________________________________#          </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true"><span style="color:sky">함수 train 소개</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false"><span style="color:sky">def train</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-3" role="tab" aria-controls="tabset-9-3" aria-selected="false"><span style="color:sky">wandb</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-4" role="tab" aria-controls="tabset-9-4" aria-selected="false"><span style="color:sky">dataset, dataloader</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-5" role="tab" aria-controls="tabset-9-5" aria-selected="false"><span style="color:sky">num_classes, model, device </span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-6" role="tab" aria-controls="tabset-9-6" aria-selected="false"><span style="color:sky">Optimizer,lr_scheduler </span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-7" role="tab" aria-controls="tabset-9-7" aria-selected="false"><span style="color:sky">load</span></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-8" role="tab" aria-controls="tabset-9-8" aria-selected="false"><span style="color:sky">train_start</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<p>이 함수는 지금까지 정의한 함수들을 이용함, 주어진 하이퍼파라미터 설정을 기반으로 모델을 학습하고 검증하는 과정을 포함되어있다. 또한, 모델의 상태를 저장하고, WandB(Weights and Biases)를 사용하여 로그를 기록한다.</p>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<pre><code>def train(epochs=200, batch_size = 8 , name = 'suwany'):
+</code></pre>
+<ul>
+<li>epochs: 학습할 총 에포크 수입니다. 기본값은 200입니다.</li>
+<li>batch_size: 미니배치의 크기입니다. 기본값은 8입니다.</li>
+<li>name: 실험 이름입니다. 기본값은 ’suwany’입니다.</li>
+</ul>
+</div>
+<div id="tabset-9-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-3-tab">
+<pre><code>    wandb.init(id=name, resume='allow', mode='disabled')
+    wandb.config.update({
+        'epochs': epochs,
+        'batch_size': batch_size,
+        'name': name
+    })</code></pre>
+<ul>
+<li>WandB를 초기화하고 설정을 업데이트합니다. 이로 인해 실험의 하이퍼파라미터가 기록됩니다</li>
+</ul>
+</div>
+<div id="tabset-9-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-4-tab">
+<pre><code>    # Train dataset
+    train_dataset = KariRoadDataset('./data/kari-road', train=True)
+    # Train dataloader
+    num_workers = min([os.cpu_count(), batch_size, 16])
+    train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, 
+                            shuffle=True, num_workers=num_workers, pin_memory=True, drop_last=False)
+
+    # Validation dataset
+    val_dataset = KariRoadDataset('./data/kari-road', train=False)
+    val_dataloader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, 
+                            shuffle=True, num_workers=num_workers, pin_memory=True, drop_last=False)
+</code></pre>
+<ul>
+<li>KariRoadDataset 클래스를 사용하여 학습 및 검증 데이터셋을 초기화합니다.</li>
+<li>각 데이터셋에 대해 데이터로더를 생성하여 데이터를 배치 단위로 로드합니다.</li>
+<li>num_workers는 데이터 로딩을 위한 CPU 스레드 수를 설정합니다.</li>
+</ul>
+</div>
+<div id="tabset-9-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-5-tab">
+<pre><code>    num_classes = 10  # background + 9 classes
+    model = models.segmentation.deeplabv3_resnet101(num_classes=num_classes)  
+    
+    # GPU-support
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.device_count() &gt; 1:   # multi-GPU
+        model = torch.nn.DataParallel(model)
+    model.to(device)</code></pre>
+<ul>
+<li>num_classes를 설정하여 모델의 클래스 수를 정의한다.
+<ul>
+<li>여기서는 road의 클래스 9개에 배경 1개를 추가한다.</li>
+</ul></li>
+<li>DeepLabV3 모델을 ResNet-101 백본을 사용하여 초기화했다.</li>
+<li>모델을 GPU로 이동시키며, 여러 GPU를 사용할 경우 DataParallel을 사용하도록 했다.</li>
+</ul>
+</div>
+<div id="tabset-9-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-6-tab">
+<pre><code>    # Optimizer
+    optimizer = optim.Adam(model.parameters(), lr=3e-4)
+      
+    # Learning rate scheduler
+    lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=5)
+</code></pre>
+<ul>
+<li>Adam 옵티마이저를 설정하여 모델 파라미터를 최적화한다.</li>
+<li>학습률 스케줄러는 검증 손실이 5회 이상 줄어들지 않을 때 학습률을 감소시키도록 설정했다.</li>
+</ul>
+</div>
+<div id="tabset-9-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-7-tab">
+<pre><code>    weight_file = Path('weights')/(name + '.pth')
+    best_accuracy = 0.0
+    start_epoch, end_epoch = (0, epochs)
+    if os.path.exists(weight_file):
+        checkpoint = torch.load(weight_file)
+        model.load_state_dict(checkpoint['model'])
+        start_epoch = checkpoint['epoch'] + 1
+        best_accuracy = checkpoint['best_accuracy']
+        print('resumed from epoch %d' % start_epoch)
+</code></pre>
+<p>기존에 저장된 체크포인트 파일이 있으면 이를 로드하여 학습을 이어서 진행할 수 있다.</p>
+</div>
+<div id="tabset-9-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-8-tab">
+<pre><code>    confusion_matrix = ConfusionMatrix(num_classes)
+    # training/validation
+    for epoch in range(start_epoch, end_epoch):
+        print('epoch: %d/%d' % (epoch, end_epoch-1))
+        t0 = time.time()
+        # training
+        epoch_loss = train_one_epoch(train_dataloader, model, optimizer, device)
+        t1 = time.time()
+        print('loss=%.4f (took %.2f sec)' % (epoch_loss, t1-t0))
+        lr_scheduler.step(epoch_loss)
+        # validation
+        val_epoch_loss = val_one_epoch(val_dataloader, model, confusion_matrix, device)
+        val_epoch_iou = confusion_matrix.get_iou()
+        val_epoch_mean_iou = confusion_matrix.get_mean_iou()
+        val_epoch_pix_accuracy = confusion_matrix.get_pix_acc()
+        
+        print('[validation] loss=%.4f, mean iou=%.4f, pixel accuracy=%.4f' % 
+              (val_epoch_loss, val_epoch_mean_iou, val_epoch_pix_accuracy))
+        print('class IoU: [' + ', '.join([('%.4f' % (x)) for x in val_epoch_iou]) + ']')
+        # saving the best status into a weight file
+        if val_epoch_pix_accuracy &gt; best_accuracy:
+             best_weight_file = Path('weights')/(name + '_best.pth')
+             best_accuracy = val_epoch_pix_accuracy
+             state = {'model': model.state_dict(), 'epoch': epoch, 'best_accuracy': best_accuracy}
+             torch.save(state, best_weight_file)
+             print('best accuracy=&gt;saved\n')
+        # saving the current status into a weight file
+        state = {'model': model.state_dict(), 'epoch': epoch, 'best_accuracy': best_accuracy}
+        torch.save(state, weight_file)
+        # wandb logging
+        wandb.log({'train_loss': epoch_loss, 'val_loss': val_epoch_loss, 'val_accuracy': val_epoch_pix_accuracy})
+</code></pre>
+<ul>
+<li>for문을 이용해 각 에포크마다 학습 및 검증을 수행한다.</li>
+<li>train_one_epoch 함수는 한 에포크 동안 학습을 수행하며, 손실 값을 반환했다.</li>
+<li>검증 단계에서는 val_one_epoch 함수를 통해 검증 손실, IoU, 평균 IoU, 픽셀 정확도를 계산한다.</li>
+<li>최상의 모델 상태를 저장하며, 현재 상태도 에폭마다 저장되도록 했다.</li>
+<li>WandB를 사용하여 학습 및 검증 손실, 정확도를 로깅되어 기록된다.</li>
+</ul>
+</div>
+</div>
 </div>
 </section>
 <section id="실행-코드" class="level1">
 <h1>실행 코드</h1>
-<div id="cell-22" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>train(epochs<span class="op">=</span><span class="dv">200</span>, batch_size <span class="op">=</span> <span class="dv">8</span> , name <span class="op">=</span> <span class="st">'suwany'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ERROR:wandb.jupyter:Failed to detect the name of this notebook, you can set it manually with the WANDB_NOTEBOOK_NAME environment variable to enable code saving.</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[10], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">train</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">epochs</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">200</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">batch_size</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">8</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">suwany</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
-
-Cell <span class="ansi-green-fg">In[9], line 14</span>, in <span class="ansi-cyan-fg">train</span><span class="ansi-blue-fg">(epochs, batch_size, name)</span>
-<span class="ansi-green-fg ansi-bold">     12</span> <span style="font-style:italic;color:rgb(95,135,135)"># Train dataloader</span>
-<span class="ansi-green-fg ansi-bold">     13</span> num_workers <span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(0,135,0)">min</span>([os<span style="color:rgb(98,98,98)">.</span>cpu_count(), batch_size, <span style="color:rgb(98,98,98)">16</span>])
-<span class="ansi-green-fg">---&gt; 14</span> train_dataloader <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">torch</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">utils</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">data</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">DataLoader</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">train_dataset</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">batch_size</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">batch_size</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span>
-<span class="ansi-green-fg ansi-bold">     15</span> <span class="ansi-yellow-bg">                        </span><span class="ansi-yellow-bg">shuffle</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">True</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">num_workers</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">num_workers</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">pin_memory</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">True</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">drop_last</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">     17</span> <span style="font-style:italic;color:rgb(95,135,135)"># Validation dataset</span>
-<span class="ansi-green-fg ansi-bold">     18</span> val_dataset <span style="color:rgb(98,98,98)">=</span> KariRoadDataset(<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">./data/kari-road</span><span style="color:rgb(175,0,0)">'</span>, train<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">False</span>)
-
-File <span class="ansi-green-fg">~/anaconda3/envs/gd/lib/python3.10/site-packages/torch/utils/data/dataloader.py:353</span>, in <span class="ansi-cyan-fg">DataLoader.__init__</span><span class="ansi-blue-fg">(self, dataset, batch_size, shuffle, sampler, batch_sampler, num_workers, collate_fn, pin_memory, drop_last, timeout, worker_init_fn, multiprocessing_context, generator, prefetch_factor, persistent_workers, pin_memory_device)</span>
-<span class="ansi-green-fg ansi-bold">    351</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:  <span style="font-style:italic;color:rgb(95,135,135)"># map-style</span>
-<span class="ansi-green-fg ansi-bold">    352</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> shuffle:
-<span class="ansi-green-fg">--&gt; 353</span>         sampler <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">RandomSampler</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">dataset</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">generator</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">generator</span><span class="ansi-yellow-bg">)</span>  <span style="font-style:italic;color:rgb(95,135,135)"># type: ignore[arg-type]</span>
-<span class="ansi-green-fg ansi-bold">    354</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg ansi-bold">    355</span>         sampler <span style="color:rgb(98,98,98)">=</span> SequentialSampler(dataset)  <span style="font-style:italic;color:rgb(95,135,135)"># type: ignore[arg-type]</span>
-
-File <span class="ansi-green-fg">~/anaconda3/envs/gd/lib/python3.10/site-packages/torch/utils/data/sampler.py:107</span>, in <span class="ansi-cyan-fg">RandomSampler.__init__</span><span class="ansi-blue-fg">(self, data_source, replacement, num_samples, generator)</span>
-<span class="ansi-green-fg ansi-bold">    103</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">TypeError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">replacement should be a boolean value, but got </span><span style="color:rgb(175,0,0)">"</span>
-<span class="ansi-green-fg ansi-bold">    104</span>                     <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">replacement=</span><span style="font-weight:bold;color:rgb(175,95,135)">{}</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(98,98,98)">.</span>format(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>replacement))
-<span class="ansi-green-fg ansi-bold">    106</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">isinstance</span>(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>num_samples, <span style="color:rgb(0,135,0)">int</span>) <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>num_samples <span style="color:rgb(98,98,98)">&lt;</span><span style="color:rgb(98,98,98)">=</span> <span style="color:rgb(98,98,98)">0</span>:
-<span class="ansi-green-fg">--&gt; 107</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">num_samples should be a positive integer </span><span style="color:rgb(175,0,0)">"</span>
-<span class="ansi-green-fg ansi-bold">    108</span>                      <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">value, but got num_samples=</span><span style="font-weight:bold;color:rgb(175,95,135)">{}</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(98,98,98)">.</span>format(<span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>num_samples))
-
-<span class="ansi-red-fg">ValueError</span>: num_samples should be a positive integer value, but got num_samples=0</pre>
-</div>
+<div id="cell-24" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>train(epochs<span class="op">=</span><span class="dv">200</span>, batch_size <span class="op">=</span> <span class="dv">8</span> , name <span class="op">=</span> <span class="st">'suwany'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>epoch: 0/199
+     iteration: 0/142, loss=2.3710
+     iteration: 1/142, loss=2.3142
+     iteration: 2/142, loss=2.2351
+     iteration: 3/142, loss=2.2264
+     iteration: 4/142, loss=2.1433
+     iteration: 5/142, loss=2.0343
+     iteration: 6/142, loss=1.9032</code></pre>
 </div>
 </div>
 
