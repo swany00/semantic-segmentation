@@ -10,10 +10,18 @@ website:
         href: https://github.com/
       - icon: twitter
         href: https://twitter.com
+  sidebar:
+    style: "floating"
+    search: true
+    contents: auto
+
+
 format:
   html:
     theme: cosmo
     css: styles.css
+
+    
 
 
 
